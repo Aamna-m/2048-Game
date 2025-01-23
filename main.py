@@ -59,7 +59,6 @@ directiontion = ''
 #Since the game still needs to be played the score is 0
 score = 0
 
-
 # draw game over and restart text
 #Creating a new variable if the player lost
 def draw_over():
@@ -78,23 +77,18 @@ def draw_over():
     screen.blit(game_over_text1, (130, 65))
     #This positions the text 70 pixels to the right and 105 pixels down from from the top left corner
     screen.blit(game_over_text2, (70, 105))
-
-
-# take your turn based on direction 
-#Reference: Asked Livjot for a bit of help in the merging part and what i was not able to understand, Websites: https://data-flair.training/blogs/python-2048-game/, https://www.geeksforgeeks.org/2048-game-in-python/
-
-
+    
 def take_turn(directiontion, game_board):
-    #in the take_turn function we check everything moving in the game_board and display it all in one. So we would merge and move them all into another number.
+    #in the take_turn function check everything moving in the game_board and display it all in one. So merge and move them all into another number.
 
     global score
-    #Needs to create a list of what tiles have merge and what not. At the begining wed add false since nothing is merged yet. The _ is also there since we dont know for sure what numbers would merge therefore a variable isnt needed.
+    #Needs to create a list of what tiles have merge and what not. At the begining add false since nothing is merged yet. The _ is also there since we dont know for sure what numbers would merge therefore a variable isnt needed.
     merged = [[False for _ in range(4)] for _ in range(4)]
     if directiontion == 'UP':
         for i in range(4):
             #The range is 4 since our grid is 4 and 4 so the numbers would move within these boxes. The range also determines tha the top row is going to merge first.
             for y in range(4):
-                #We move according to the 0's on the game_board. So we set a variable to 0
+                #Move according to the 0's on the game_board. Set a variable to 0
                 blank_spaces = 0
                 #If your in a row that isnt the top row because the top row tiles would not move up since theyre already at the top row.
                 if i > 0:
@@ -110,7 +104,7 @@ def take_turn(directiontion, game_board):
                         game_board[i - blank_spaces][y] = game_board[i][y]
                         #This now means that the part of the game_board the tiles had moved is going to be ecurrent_pieceual to 0.
                         game_board[i][y] = 0
-#If the tiles are together and the same we want them to merge however we dont want them to merge if the tiles have already merged together since 2048 dos not let multiple tiles merge all at one. The \ allows the condition to go on the next row.
+#If the tiles are together and the same want them to merge however we dont want them to merge if the tiles have already merged together since 2048 dos not let multiple tiles merge all at one. The \ allows the condition to go on the next row.
                     if game_board[i - blank_spaces - 1][y] == game_board[i - blank_spaces][y] and not merged[i - blank_spaces][y] \
                             and not merged[i - blank_spaces - 1][y]:
                         #To double the original vlaue and empty out the space of the previous tile.
@@ -186,15 +180,6 @@ def take_turn(directiontion, game_board):
     #Processes how the game_board looks after each turn is made and displays it on the game game_board
     return game_board
 
-#Refreneces 
-
-#This helped me to create a background of the color and how to change it.
-#https://www.geeksforgeeks.org/how-to-change-screen-background-color-in-pygame/
-#This website showed me how to create a spacing betweenn tiles and how to create tiles, and plus chossing a font for the numbers to be in. 
-#https://techvidvan.com/tutorials/python-2048-game-project-with-source-code/
-#This helped me to create the pygame rectangle where the game is being played 
-#https://www.geeksforgeeks.org/how-to-draw-rectangle-in-pygame/
-  
 # spawn in new pieces randomly when turns start 
 def new_pieces(game_board):
     #if the count is 0 meaning there are empty spaces on the game board
